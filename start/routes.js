@@ -23,6 +23,6 @@ Route.get('/', () => {
 
 Route.group(() => {
   // Frontend
-  Route.get(`/default/web-menu-top`, 'News/MenuController.webMenuTop');
+  Route.get(`/default/web-menu-top`, 'News/DefaultController.webMenuTop');
   Route.get(`/categories`, 'News/CategoryController.list');
 }).prefix(`${version1}`);

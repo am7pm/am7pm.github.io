@@ -10,7 +10,6 @@ class DefaultController {
   }
 
   constructor(Category) {
-    // super();
     this._cateService = Category;
   }
 
