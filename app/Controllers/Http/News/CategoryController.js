@@ -10,17 +10,15 @@ class CategoryController { // extends BaseController {
     }
 
     constructor(Category) {
-        // super();
         this._cateService = Category;
     }
 
+  async list({ request, response }) {
+    const cates = await this._cateService.getList();
 
-    async list({ request, response }) {
-        const cates = await this._cateService.getList();
-
-        return response
-            .success(cates);
-    }
+    return response
+      .success(cates);
+  }
 }
 
 module.exports = CategoryController;

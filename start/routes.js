@@ -15,7 +15,7 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-const version = 'v1';
+const version1 = 'v1';
 
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
@@ -23,7 +23,6 @@ Route.get('/', () => {
 
 Route.group(() => {
   // Frontend
-  Route.get('/categories', 'News/CategoryController.list');
-});
-
-Route.get('/api/hello', 'TestController.hello')
+  Route.get(`/default/web-menu-top`, 'News/MenuController.webMenuTop');
+  Route.get(`/categories`, 'News/CategoryController.list');
+}).prefix(`${version1}`);

@@ -20,6 +20,19 @@ class Category {
 
         return cates;
     }
+
+    async menuTop(filter = {}) {
+        const cates = await Categories
+            .query()
+            .select('id','name','slug','icon','metaTags')
+            .where('isShow', 1)
+            .where('top', 1)
+            .orderBy('sort_order', 'asc')
+            .limit(10)
+            .fetch();
+
+        return cates;
+    }
 };
 
 module.exports = Category;
