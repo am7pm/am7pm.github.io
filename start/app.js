@@ -16,7 +16,8 @@ const providers = [
   '@adonisjs/bodyparser/providers/BodyParserProvider',
   '@adonisjs/cors/providers/CorsProvider',
   '@adonisjs/lucid/providers/LucidProvider',
-  'adonis-swagger/providers/SwaggerProvider'
+  'adonis-swagger/providers/SwaggerProvider',
+  '@rocketseat/adonis-timezone/providers/TimezoneProvider',
 ]
 
 /*
@@ -45,7 +46,7 @@ const aceProviders = [
 |
 */
 const aliases = {
-  // BaseController: 'App/Controllers/Http/BaseController'
+  BaseController: 'App/Controllers/Http/BaseController',
 }
 
 /*

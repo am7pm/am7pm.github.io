@@ -22,7 +22,19 @@ Route.get('/', () => {
 });
 
 Route.group(() => {
-  // Frontend
+  // Token
+  Route.get(`/auth/guest/token`, 'News/AuthenticationController.generateGuestToken');
+})
+  .prefix(`${version1}`);
+
+Route.group(() => {
+  // Auth
+  Route.get(`/auth/verify-token`, 'News/AuthenticationController.verifyToken');
   Route.get(`/default/web-menu-top`, 'News/DefaultController.webMenuTop');
+
+  // Frontend
   Route.get(`/categories`, 'News/CategoryController.list');
-}).prefix(`${version1}`);
+
+})
+  .prefix(`${version1}`)
+  .middleware('auth:jwt_guest');

@@ -7,37 +7,37 @@ hooks.after.providersBooted(() => {
     const Response = use('Adonis/Src/Response')
 
     const responses = [
-        { status: 200, name: 'success', type: 'SUCCESS' },
-        { status: 400, name: 'badRequest', type: 'BAD_REQUEST' },
-        { status: 401, name: 'unAuthorized', type: 'UNAUTHORIZED' },
-        { status: 403, name: 'forbidden', type: 'FORBIDDEN' },
-        { status: 404, name: 'notFound', type: 'NOT_FOUND' },
-        { status: 500, name: 'system', system: 'SYSTEM' }
+        { status: 200, name: 'success', code: 'SUCCESS' },
+        { status: 400, name: 'badRequest', code: 'BAD_REQUEST' },
+        { status: 401, name: 'unAuthorized', code: 'UNAUTHORIZED' },
+        { status: 403, name: 'forbidden', code: 'FORBIDDEN' },
+        { status: 404, name: 'notFound', code: 'NOT_FOUND' },
+        { status: 500, name: 'system', code: 'SYSTEM' }
     ]
 
     responses.forEach((res) => {
 
-        Response.macro(res.name, function (data, overrideStatus, message = null, type = null) {
+        Response.macro(res.name, function (data, overrideStatus, message = null, code = null) {
             if (typeof overrideStatus === 'function') {
                 return overrideStatus()
             }
 
             const status = overrideStatus || res.status;
             const result = _.find(responses, { status: status });
-            type = type || result.type;
+            code = code || result.code;
             switch (status) {
                 case 200:
                     if (data) {
                         this.status(status).send({
                             status: res.status,
-                            type: res.type,
+                            code: res.code,
                             message: 'successful',
                             data: data
                         });
                     } else {
                         this.status(status).send({
                             status: res.status,
-                            type: res.type,
+                            code: res.code,
                             message: 'successful'
                         });
                     }
@@ -60,8 +60,8 @@ hooks.after.providersBooted(() => {
                         status: status,
                         type: type,
                         error: {
-                            code: code,
-                            message: message
+                            code,
+                           message
                         }
                     });
                     break;

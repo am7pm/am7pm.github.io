@@ -2,6 +2,7 @@
 
 /** @type {import('@adonisjs/framework/src/Env')} */
 const Env = use('Env')
+const fs = use("fs")
 
 module.exports = {
   /*
@@ -90,5 +91,17 @@ module.exports = {
     scheme: 'api',
     uid: 'email',
     password: 'password'
-  }
+  },
+
+  jwt_guest: {
+    serializer: 'lucid',
+    model: 'App/Models/Token',
+    scheme: 'jwt',
+    options: {
+      algorithm: 'RS256',
+      expiresIn: 9000000,
+      secret: fs.readFileSync('./keys/jwtRS256.key'),
+      public: fs.readFileSync('./keys/jwtRS256.key.pub')
+    }
+  },
 }

@@ -1,7 +1,7 @@
-// const BaseController = use('BaseController');
+const BaseController = use('BaseController');
 const CateService = use('App/Services/Category');
 
-class DefaultController {
+class DefaultController extends BaseController {
 
   static get inject() {
     return [
@@ -10,6 +10,7 @@ class DefaultController {
   }
 
   constructor(Category) {
+    super();
     this._cateService = Category;
   }
 
@@ -20,6 +21,8 @@ class DefaultController {
   *     tags:
   *       - Menu
   *     summary: Menu API
+  *     security:
+  *       - bearerAuth: []
   *     responses:
   *       200:
   *         description: Danh sách menu top
@@ -29,14 +32,25 @@ class DefaultController {
                 name: "Bóng Đá Anh",
                 slug: "bong-da-anh",
                 icon: null,
-                metaTags: null
+                metaTags: null,
+                subMenu: {
+                  id: "5f8163ae12ddb5c3993057c0",
+                  name: "Ngoại Hạng Anh",
+                  slug: "ngoai-hang-anh",
+                  icon: null,
+                  metaTags: null,
+                }
               }]
   */
-  async webMenuTop({ request, response }) {
-    const cates = await this._cateService.menuTop();
+  async webMenuTop({ request, response, auth }) {
+    try {
+      const cates = await this._cateService.menuTop();
 
-    return response
-      .success(cates);
+      return response
+        .success(cates);
+    } catch (error) {
+      
+    }
   }
 }
 

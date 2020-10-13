@@ -56,6 +56,10 @@ module.exports = {
       user: Env.get('DB_NEWS_USER', 'root'),
       password: Env.get('DB_NEWS_PASSWORD', ''),
       database: Env.get('DB_NEWS_DATABASE', 'am7pm.news'),
+      timezone: 'Asia/Ho_Chi_Minh',
+      // options: {
+      //   useUTC: true
+      // }
     },
     debug: Env.get('DB_DEBUG', false),
     // connectionLimit : 10,
