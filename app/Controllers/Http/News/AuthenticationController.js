@@ -59,11 +59,12 @@ class AuthenticationController extends BaseController {
   */
   async verifyToken({ request, response, auth }) {
     try {
-      const apiAuth = auth.authenticator('jwt_guest');
-      const token = auth.getAuthHeader();
-      const tokenPayload = jwtDecode(token);
+      // const apiAuth = auth.authenticator('jwt_guest');
+      // const token = auth.getAuthHeader();
+      // const tokenPayload = jwtDecode(token);
+      const data = await this._auth.getUserInfo(auth);
 
-      return response.success(tokenPayload);
+      return response.success(data);
     } catch (error) {
       throw error;
     }

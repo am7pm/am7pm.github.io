@@ -24,17 +24,19 @@ Route.get('/', () => {
 Route.group(() => {
   // Token
   Route.get(`/auth/guest/token`, 'News/AuthenticationController.generateGuestToken');
+
+  // Menu
+  Route.get(`/default/web-menu-top`, 'News/DefaultController.webMenuTop');
+
+  // Frontend
+  Route.get(`/categories`, 'News/CategoryController.list');
+  Route.get(`/categories/slug/:slug`, 'News/CategoryController.getCateBySlug');
 })
   .prefix(`${version1}`);
 
 Route.group(() => {
   // Auth
   Route.get(`/auth/verify-token`, 'News/AuthenticationController.verifyToken');
-  Route.get(`/default/web-menu-top`, 'News/DefaultController.webMenuTop');
-
-  // Frontend
-  Route.get(`/categories`, 'News/CategoryController.list');
-
 })
   .prefix(`${version1}`)
   .middleware('auth:jwt_guest');

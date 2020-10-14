@@ -3,36 +3,47 @@ const Categories = use('App/Models/News/Category');
 
 class Category {
 
-    async list(filter = {}) {
-        const cates = await Categories
-            .query()
-            // .where('isShow', 1)
-            .limit(10)
-            .fetch();
+  async list(filter = {}) {
+    const cates = await Categories
+      .query()
+      // .where('isShow', 1)
+      .limit(10)
+      .fetch();
 
-        // const news = await Database
-        //     .connection('mysql', { mode: 'write' })
-        //     .from('news_posts_crawl')
-        //     .where('isShow', 1)
-        //     .from('news_posts_crawl')
-        //     .select('*')
-        //     .limit(10);
+    // const news = await Database
+    //     .connection('mysql', { mode: 'write' })
+    //     .from('news_posts_crawl')
+    //     .where('isShow', 1)
+    //     .from('news_posts_crawl')
+    //     .select('*')
+    //     .limit(10);
 
-        return cates;
+    return cates;
+  }
+
+  async menuTop(filter = {}) {
+    const cates = await Categories
+      .query()
+      .select('id', 'name', 'slug', 'icon', 'metaTags')
+      .where('isShow', 1)
+      .where('top', 1)
+      .orderBy('sort_order', 'asc')
+      .limit(10)
+      .fetch();
+
+    return cates;
+  }
+
+  async getSlug(filter = {}) {
+    if (filter.slug) {
+      const cate = await Categories
+        .findBy('slug', filter.slug);
+
+      return cate;
     }
 
-    async menuTop(filter = {}) {
-        const cates = await Categories
-            .query()
-            .select('id','name','slug','icon','metaTags')
-            .where('isShow', 1)
-            .where('top', 1)
-            .orderBy('sort_order', 'asc')
-            .limit(10)
-            .fetch();
-
-        return cates;
-    }
+    return {};
+  }
 };
 
 module.exports = Category;

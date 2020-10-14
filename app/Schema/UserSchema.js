@@ -1,7 +1,7 @@
 class UserSchema {
     id = null;
     location = null;
-    userType = 'guest';
+    userType = 'user';
     lat = null;
     long = null;
     timezone = null;

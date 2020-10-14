@@ -1,7 +1,8 @@
 'use strict'
 
-const Env = use('Env')
+const Env = use('Env');
 const Database = use('Database');
+const jwtDecode = use('jwt-decode');
 const Format = use('App/Helpers/Format');
 const Config = use('Config').get('constant');
 
@@ -10,12 +11,13 @@ class Authentication {
   static get inject() {
     return [
       'App/Models/Token',
-      'App/Schema/GuestSchema',
       'App/Helpers/Util',
+      'App/Schema/GuestSchema',
+      'App/Schema/UserSchema',
     ];
   }
 
-  constructor(Token, GuestSchema, Util) {
+  constructor(Token, Util, GuestSchema, UserSchema) {
     this._token = Token;
     this._guest = GuestSchema;
     this._util = Util;
@@ -42,6 +44,7 @@ class Authentication {
           token: token['token'],
           expire: Format.getDateTimeLocaleString(now),
           isActive: true,
+          userType: Config.USER_TYPE.GUEST,
         }
 
         // await this._token.create(dataToken);
@@ -75,11 +78,29 @@ class Authentication {
         long: resIp.data.lon,
         location: resIp.data.timezone
       };
-
       return result;
     } catch (error) {
       return {};
     }
+  }
+
+  async getUserInfo(auth) {
+    const token = auth.getAuthHeader();
+    if (token) {
+      try {
+        const tokenPayload = jwtDecode(token);
+        if (tokenPayload && tokenPayload.data) {
+          const { data: userType } = tokenPayload;
+          // switch (userType) {
+          //   case Config.
+          // }
+          return {...this._guest, ...tokenPayload.data}
+        }
+      } catch (error) {
+
+      }
+    }
+    return this._guest;
   }
 
 };

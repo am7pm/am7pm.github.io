@@ -8,6 +8,7 @@ class Token extends Model {
   token = null;
   expire = null;
   isActive = true;
+  userType = null;
 
   static get table() {
     return 'tokens';
