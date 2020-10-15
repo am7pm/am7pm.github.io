@@ -28,15 +28,21 @@ Route.group(() => {
   // Menu
   Route.get(`/default/web-menu-top`, 'News/DefaultController.webMenuTop');
 
-  // Frontend
+  // Category
   Route.get(`/categories`, 'News/CategoryController.list');
   Route.get(`/categories/slug/:slug`, 'News/CategoryController.getCateBySlug');
+  Route.get(`/categories/id/:cateId`, 'News/CategoryController.getCateById');
 })
   .prefix(`${version1}`);
 
 Route.group(() => {
   // Auth
   Route.get(`/auth/verify-token`, 'News/AuthenticationController.verifyToken');
+
+  // News
+  Route.get(`/news/:slugCate`, 'News/NewsController.getNewses');
+  Route.get(`/news/:slugCate/:slugNews`, 'News/NewsController.getNews');
+  Route.get(`/news/hot`, 'News/NewsController.getNewsesHot');
 })
   .prefix(`${version1}`)
   .middleware('auth:jwt_guest');

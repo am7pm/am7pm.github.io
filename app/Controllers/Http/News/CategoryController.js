@@ -48,7 +48,38 @@ class CategoryController extends BaseController {
   async getCateBySlug({ request, response, auth }) {
     let filters = request.params;
     const token = auth.getAuthHeader();
-    const cates = await this._cateService.getSlug(filters, {});
+    const cates = await this._cateService.getSlug(filters);
+
+    return response
+      .success(cates);
+  }
+
+  /**
+  * @swagger
+  * /v1/categories/id/{cateId}:
+  *   get:
+  *     tags:
+  *       - Category
+  *     summary: Get Category
+  *     parameters:
+  *       - in: path
+  *         name: cateId
+  *         schema:
+  *           type: string
+  *         required: true
+  *         description: cateId category
+  *     responses:
+  *       200:
+  *         description: lấy category bằng id
+  *         example:
+  *           data: {
+                
+              }
+  */
+  async getCateById({ request, response, auth }) {
+    const filters = request.params;
+    const authInfo = this._auth.getUserInfo(auth);
+    const cates = await this._cateService.getId(filters, authInfo);
 
     return response
       .success(cates);

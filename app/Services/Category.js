@@ -34,10 +34,21 @@ class Category {
     return cates;
   }
 
-  async getSlug(filter = {}) {
+  async getSlug(filter = {}, auth = {}) {
     if (filter.slug) {
       const cate = await Categories
         .findBy('slug', filter.slug);
+
+      return cate;
+    }
+
+    return {};
+  }
+
+  async getId(filter = {}, auth = {}) {
+    if (filter.cateId) {
+      const cate = await Categories
+        .findBy('id', filter.cateId);
 
       return cate;
     }
