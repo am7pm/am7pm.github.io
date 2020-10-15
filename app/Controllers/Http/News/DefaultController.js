@@ -33,13 +33,13 @@ class DefaultController extends BaseController {
                 slug: "bong-da-anh",
                 icon: null,
                 metaTags: null,
-                subMenu: {
+                subMenu: [{
                   id: "5f8163ae12ddb5c3993057c0",
                   name: "Ngoại Hạng Anh",
                   slug: "ngoai-hang-anh",
                   icon: null,
                   metaTags: null,
-                }
+                }]
               }]
   */
   async webMenuTop({ request, response, auth }) {
