@@ -113,7 +113,7 @@ class NewsController extends BaseController {
       return response.success(post);
     } else {
       return response
-        .notFound(null, { message: 'Không tồn tại danh mục', code: 404 });
+        .notFound(null, { message: 'Không tồn tại danh mục', status: 404 });
     }
 
     return response
