@@ -5,8 +5,10 @@
   "description": "Adonisjs boilerplate for API server with pre-configured JWT",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npm config set package-lock false",
     "start": "node --stack-size=65500 server.js",
-    "test": "node ace test"
+    "test": "node ace test",
+    "build": "npm install"
   },
   "keywords": [
     "adonisjs",
