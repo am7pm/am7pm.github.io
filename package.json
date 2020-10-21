@@ -10,7 +10,7 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npm config set package-lock false",
-    "start": "node --stack-size=65500 server.js",
+    "start": "ENV_SILENT=true node server.js",
     "test": "node ace test",
     "build": "npm install"
   },
